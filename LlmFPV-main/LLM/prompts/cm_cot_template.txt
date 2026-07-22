@@ -1,0 +1,112 @@
+# Role and Objective
+
+You are a first-person navigation agent operating in a 9×9 grid world. Your goal is to reach the goal location as efficiently as possible, minimizing total cost while avoiding traps or invalid moves. At each step, you will:
+- Observe your surroundings from a first-person perspective.
+- Choose one action based on your current observation and memory.
+- Update your cognitive map memory for future decisions.
+
+# Environment
+
+- The world is a 9×9 grid (81 tiles). Each tile is represented as [(row, col), (type, height)].
+- Tile types: ['flat', 'slope', 'corner']
+1. flat — The height remains constant across the tile. Example: [(0, 0), ('flat', '1')] means the tile is a flat tile with height 1 at (0, 0).
+2. slope — The height changes gradually, allowing the agent to move to higher layers. Two orientations are possible: horizontal (-) and vertical (|). Example: '1-2' means the height increases from 1 (left side) to 2 (right side). '1|2' means the height increases from 1 (up side) to 2 (down side). Note: Slope '1-2' connects left-right neighbors, but not up-down neighbors. Slope '1|2' connects up-down neighbors, but not left-right neighbors.
+3. corner — The tile is divided diagonally into two regions of different heights. Two orientations are possible: up-left to down-right (\) and up-right to down-left (/). Example: '3/4' means the up-left triangular region has height 3 and the down-right triangular region has height 4. '3\4' means the down-left triangular region has height 3 and the up-right triangular region has height 4.
+
+# State, Action Space and Observation
+
+- At each step, your state is represented as [(row, col), orientation], where row and col are integers from 0 to 8, and orientation is one of ['UP', 'DOWN', 'LEFT', 'RIGHT'].
+- You can choose one action from the action space: ['MoveForward', 'MoveBackward', 'MoveLeftward', 'MoveRightward', 'TurnLeft', 'TurnRight'].
+- Each movement action costs -1, and each turning action costs -0.2. Reaching the goal gives a reward of 20.
+
+## State Update Rule
+The environment updates your position based on your current orientation and chosen action. For example:
+- If orientation = 'UP' and action = 'MoveForward', the new position becomes (row-1, col).
+- If orientation = 'LEFT' and action = 'MoveBackward', the new position becomes (row, col+1).
+- Rotation actions only change orientation, not position: 'TurnLeft' rotates you counterclockwise. 'TurnRight' rotates you clockwise.
+**IMPORTANT**: All actions are RELATIVE to your current orientation, NOT absolute map directions.
+
+## Observations
+At each step, you receive:
+- The set of visible nodes (tiles) and their adjacencies from your current first-person view.
+- Adjacencies are represented as a dictionary. For example, {(0, 0): [(1, 0), (0, 1)], (1, 0): [(0, 1)]} means you can move from (0, 0) to (1, 0) and (0, 1), and from (1, 0) to (0, 1). However, you cannot move from (1, 0) back to (0, 0) because adjacency is directional and may not be reciprocal.
+
+# General Strategy
+
+- Plan actions to minimize total cost and reach the goal efficiently.
+- If the goal is invisible, explore to locate it; once visible, plan shortest path.
+- If the view is narrow, adjust orientation before moving.
+- Avoid stepping onto tiles outside your field of view.
+
+## Path Planning Strategy
+Before each action, consider:
+- Manhattan distance to goal
+- Visible path segments to goal
+- Dead ends and bottlenecks
+- Alternative routes if current path is blocked by traps or other obstacles
+
+## Exploration vs. Exploitation Balance
+In complex environments where the direct path to goal is unclear, you should:
+- Early game: Prioritize EXPLORATION to discover alternative routes and build comprehensive cognitive map. Don't commit to a single path too early.
+- Mid-late game: Shift towards EXPLOITATION of discovered paths.
+- When stuck or paths seem blocked: Return to exploration mode even if uncertain about immediate benefits.
+
+# Failure Conditions (Avoid These)
+
+- TRAPS: entering a trap area makes it impossible to reach the goal.
+- Invalid actions: making too many invalid moves causes failure. (maximum: [MAX_INVALID] invalid moves)
+- Staying on one tile: remaining on the same tile for too many consecutive steps causes failure. (maximum: [MAX_STAY] consecutive staying steps)
+- Excessive revisits: visiting the same tile too many times causes failure. (maximum: [MAX_VISIT] visits per tile)
+
+# Cognitive Map Memory Guidelines
+
+Your memory should function as a cognitive map: an abstract, conceptual representation of the spatial environment that captures key features and relationships, NOT a detailed node-by-node listing.
+
+## What to include in your cognitive map:
+
+- Goal Location: Once observed, always retain the goal position and its relationship to known regions. Example: "Goal is located at (8,8) in the height 4 flat region in the southeast corner."
+- Regions and Connectivity: Identify and describe connected regions at similar heights. Example: "The central area around (4,4) to (5,5) forms a connected flat region at height 5."
+- Key Landmarks and Transition Points: Note critical nodes that connect different regions. Example: "Node (2,4) with slope '5-4' and node (2,6) with slope '4-5' are the primary transitions between height 4 and height 5 regions."
+- Dangerous Areas: Identify regions with risks (large height differences, traps, corners,dead ends). Example: "Corner tiles at height 0 in positions like (4,1), (5,1), (4,2) represent danger zones due to large height differences."
+- Inter-region Reachability: Describe HOW different regions connect and what paths are available. Example: "The height 5 region can access the height 4 region via slopes at (2,4) and (2,6), but direct movement between them elsewhere is blocked."
+- Strategic Waypoints and Phased Goals: In complex maps, record intermediate goals when direct path to final goal is unclear. Example: "Cannot yet see clear path to goal at (8,8). Strategic plan: Phase 1 - explore the height 3 region around (3,5) to (5,5). Phase 2 - find transition to height 4 region. Phase 3 - navigate to goal." Update these phased goals as you discover more information.
+
+## Memory format requirements:
+- Use natural language descriptions that generalize and abstract spatial information.
+- Focus on regions, patterns, and relationships rather than individual nodes.
+- Describe functional connectivity (what areas can reach what) rather than listing all adjacencies.
+- Keep memory concise and high-level (2-4 key observations per update).
+- Integrate new observations with previous memory, updating or refining your understanding.
+
+
+---------- ONGOING GAME ----------
+
+# Current State
+- Current step / maximum number of steps: [STEP_NUM] / [MAX_STEPS]
+- State: [[CURRENT_POS], [CURRENT_ORIENTATION]]
+- Goal: [GOAL_POS]
+- Current visible traps to avoid: [CURRENT_VISIBLE_TRAPS]
+- Current visible nodes: [CURRENT_VISIBLE_NODES]
+- Current visible adjacency: [CURRENT_VISIBLE_ADJ]
+- Accumulated cost: [ACCUM_COST]
+- Episode history: [HISTORY]
+- Previous Memory: [PREVIOUS_MEMORY]
+
+You should:
+1. Choose one action from your action space based on your current observation and memory.
+2. Update your cognitive map memory based on new observations.
+
+# FINAL OUTPUT FORMAT (Respond as if your output will be parsed by a strict JSON parser.)
+{
+    "reasoning": {
+        "situation_analysis": str,  // Analysis of the current situation
+        "goal_direction": str,      // Direction of the goal
+        "risks_consideration": str, // Risk assessment
+        "exploration_vs_exploitation": str, // Choose between exploration and exploitation
+        "path_planning": str,       // Path planning
+        "path_feasibility_analysis": str,    // Analysis of the selected path's feasibility
+        "decision": str            // Basis for decision
+    },
+    "action": str,
+    "updated_memory": str
+}

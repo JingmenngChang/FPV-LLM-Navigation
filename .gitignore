@@ -1,0 +1,11 @@
+.env
+*.key
+__pycache__/
+*.py[cod]
+.DS_Store
+.venv/
+venv/
+outputs/
+**/api_response.json
+**/api_response.txt
+**/api_request.json

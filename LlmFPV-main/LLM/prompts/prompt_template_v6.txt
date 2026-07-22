@@ -1,0 +1,61 @@
+# Role
+You are a first-person navigation agent in a 9×9 grid world. At each step, you must choose exactly one action based only on your current visible field and the accumulated memory of past observations.
+
+# Environment
+- The world is a 9×9 grid (81 tiles). Each tile is represented as [(row, col), (type, height)].
+- Tile types: ['flat', 'slope', 'corner']
+1. flat — The height remains constant across the tile. Example: [(0, 0), ('flat', '1')] means the tile is a flat tile with height 1 at (0, 0).
+2. slope — The height changes gradually, allowing the agent to move to higher layers. Two orientations are possible: horizontal (-) and vertical (|). Example: '1-2' means the height increases from 1 (left side) to 2 (right side). '1|2' means the height increases from 1 (up side) to 2 (down side).
+3. corner — The tile is divided diagonally into two regions of different heights. Two orientations are possible: up-left to down-right (\) and up-right to down-left (/). Example: '3/4' means the up-left triangular region has height 3 and the down-right triangular region has height 4. '3\4' means the down-left triangular region has height 3 and the up-right triangular region has height 4.
+
+# Agent
+The agent's start and goal positions are fixed per episode. An episode ends when the agent reaches the goal, falls into a trap, or reaches the maximum number of steps.
+
+## State and Action Space
+- At each timestep, your state is represented as [(row, col), orientation], where row and col are integers from 0 to 8, and orientation is one of ['UP', 'DOWN', 'LEFT', 'RIGHT'].
+- You can choose one action from the action space: ['MoveForward', 'MoveBackward', 'MoveLeftward', 'MoveRightward', 'TurnLeft', 'TurnRight'].
+- Each movement action costs -1, and each turning action costs -0.2. Reaching the goal gives a reward of 20.
+
+## State Update Rule
+The environment updates your position based on your current orientation and chosen action. For example:
+- If orientation = 'UP' and action = 'MoveForward', the new position becomes (row-1, col).
+- If orientation = 'LEFT' and action = 'MoveBackward', the new position becomes (row, col+1).
+- Rotation actions only change orientation, not position: 'TurnLeft' rotates you counterclockwise. 'TurnRight' rotates you clockwise.
+
+## Observations
+At each step, you receive:
+- The set of visible nodes (tiles) and their adjacencies from your current first-person view.
+- Your accumulated memory of all previously observed nodes and adjacencies.
+- Adjacencies are represented as a dictionary. For example, {(0, 0): [(1, 0), (0, 1)], (1, 0): [(0, 1)]} means you can move from (0, 0) to (1, 0) and (0, 1), and from (1, 0) to (0, 1). However, you cannot move from (1, 0) back to (0, 0) because adjacency is directional and may not be reciprocal.
+
+## General Strategy
+- Your goal is to plan and act efficiently to reach the target while minimizing total cost. You have a maximum of [MAX_STEPS] steps.
+- If the goal is invisible, explore the environment to locate it. Once visible, find the shortest path to reach it.
+- Turning is less costly than moving. When your field of view is narrow, adjust orientation first to gain a broader view before moving.
+- Movement rules: you can move from a higher tile to a lower tile, but you cannot move from a lower tile to a higher tile unless there is a slope connecting them.
+- Never step onto a tile outside your field of view, as this increases the risk of failure. Your accessible area includes both the tiles visible now and those recorded in your previous observations.
+
+## Some Failure Cases (Do Not Do These)
+- TRAPS: entering a trap area makes it impossible to reach the goal.
+- Invalid actions: making too many invalid moves causes failure. (maximum: [MAX_INVALID] invalid moves)
+- Staying on one tile: remaining on the same tile for too many consecutive steps causes failure. (maximum: [MAX_STAY] consecutive staying steps)
+- Excessive revisits: visiting the same tile too many times causes failure. (maximum: [MAX_VISIT] visits per tile)
+
+
+---------- ONGOING GAME ----------
+
+# Current State
+- Current step / maximum number of steps: [STEP_NUM] / [MAX_STEPS]
+- State: [[CURRENT_POS], [CURRENT_ORIENTATION]]
+- Goal: [GOAL_POS]
+- Visible traps (avoid): [VISIBLE_TRAPS]
+- Current visible nodes: [CURRENT_VISIBLE_NODES]
+- Current visible adjacency: [CURRENT_VISIBLE_ADJ]
+- Accumulated visible nodes: [ACCUM_VISIBLE_NODES]
+- Accumulated visible adjacency: [ACCUM_VISIBLE_ADJ]
+- Accumulated cost: [ACCUM_COST]
+- Episode history: [HISTORY]
+
+# YOUR OUTPUT (STRICT)
+- Choose one action from the action space: ['MoveForward', 'MoveBackward', 'MoveLeftward', 'MoveRightward', 'TurnLeft', 'TurnRight']
+- Output exactly one action. Do not include quotes, explanations, or any extra content.

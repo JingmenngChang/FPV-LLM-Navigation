@@ -1,0 +1,28 @@
+{
+  "main_fpv_baseline": {
+    "conditions": ["omniscient"],
+    "task_scope": "all_180_map_trials",
+    "prompt": "LlmFPV-main/LLM/prompts/prompt_template_v6.txt"
+  },
+  "cognitive_map_prompt": {
+    "conditions": ["none/cm_cot", "goal_only/cm_cot"],
+    "task_scope": "all_180_map_trials",
+    "prompt": "LlmFPV-main/LLM/prompts/cm_cot_legacy.txt"
+  },
+  "goal_trap_memory": {
+    "conditions": ["none", "goal_only", "trap_only", "all"],
+    "task_scope": "all_180_map_trials",
+    "prompt": "LlmFPV-main/LLM/prompts/prompt_template_v6.txt",
+    "memory_type": "recent",
+    "memory_size": 1
+  },
+  "intervention": {
+    "conditions": [
+      "none",
+      "higher_elevation",
+      "wider_exploration",
+      "higher_elevation_wider_exploration"
+    ],
+    "task_scope": "model_specific_hard_set_derived_from_baseline_results"
+  }
+}
