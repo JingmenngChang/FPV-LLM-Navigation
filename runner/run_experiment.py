@@ -102,7 +102,7 @@ def derive_hard_set_tasks(
             incomplete.append({"map_id": map_id, "trial": trial, "runs": len(outcomes)})
             continue
         success_rate = sum(outcomes) / len(outcomes)
-        if success_rate < threshold:
+        if success_rate <= threshold:
             eligible.append({"map_id": map_id, "trial": trial})
 
     metadata = {
@@ -113,6 +113,7 @@ def derive_hard_set_tasks(
         "map_trials_with_results": len(groups),
         "minimum_baseline_runs": minimum_runs,
         "hard_threshold": threshold,
+        "hard_threshold_operator": "<=",
         "incomplete_map_trials": incomplete,
         "selected_hard_tasks": len(eligible),
     }
@@ -132,7 +133,12 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--output-root", default="outputs")
     parser.add_argument("--baseline-results", default="", help="baseline output directory used to derive an intervention hard set")
     parser.add_argument("--baseline-model", default="", help="model id to select when the baseline directory contains multiple models")
-    parser.add_argument("--hard-threshold", type=float, default=0.4)
+    parser.add_argument(
+        "--hard-threshold",
+        type=float,
+        default=0.4,
+        help="inclusive maximum baseline success rate for the dynamic hard set (default: 0.4)",
+    )
     parser.add_argument("--minimum-baseline-runs", type=int, default=5)
     parser.add_argument("--task-file", default="", help="optional CSV or JSON with map_id and trial columns")
     parser.add_argument("--repeat-start", type=int, default=0)

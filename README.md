@@ -231,7 +231,7 @@ python3 "runner/run_experiment.py" \
   --output-root "outputs"
 ```
 
-Following the definition in the paper, the runner groups baseline `result.json` files by map-trial and selects trials whose success rate is strictly below `--hard-threshold` (default: `0.4`), provided that at least `--minimum-baseline-runs` valid results are available. A map-trial with success rate exactly `0.4` is not included. If a baseline directory contains multiple model IDs, specify the intended model with `--baseline-model`.
+Following the definition in the paper, the runner groups baseline `result.json` files by map-trial and selects trials whose success rate is less than or equal to `--hard-threshold` (default: `0.4`), provided that at least `--minimum-baseline-runs` valid results are available. A map-trial with success rate exactly `0.4` is therefore included. If a baseline directory contains multiple model IDs, specify the intended model with `--baseline-model`.
 
 Alternatively, provide a model-specific CSV or JSON task list with `--task-file`. Each row must contain `map_id` and `trial`.
 
