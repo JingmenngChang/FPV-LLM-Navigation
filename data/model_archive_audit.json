@@ -1,0 +1,38 @@
+{
+  "deepseek-v3.1": {
+    "frozen_local_results": 900,
+    "remote_results": 984,
+    "remote_results_excluded_as_nonfrozen": 84,
+    "result_sha256_matches": 900,
+    "frozen_episodes_with_mirrored_step_io": 720,
+    "mirrored_prompt_files_for_frozen_episodes": 18376,
+    "mirrored_raw_files_for_frozen_episodes": 18375
+  },
+  "glm-4.5": {
+    "frozen_local_results": 900,
+    "remote_results": 900,
+    "remote_results_excluded_as_nonfrozen": 0,
+    "result_sha256_matches": 900,
+    "frozen_episodes_with_mirrored_step_io": 720,
+    "mirrored_prompt_files_for_frozen_episodes": 20139,
+    "mirrored_raw_files_for_frozen_episodes": 20090
+  },
+  "kimi-k2-thinking": {
+    "frozen_local_results": 900,
+    "remote_results": 900,
+    "remote_results_excluded_as_nonfrozen": 0,
+    "result_sha256_matches": 900,
+    "frozen_episodes_with_mirrored_step_io": 720,
+    "mirrored_prompt_files_for_frozen_episodes": 19845,
+    "mirrored_raw_files_for_frozen_episodes": 19817
+  },
+  "qwen3-235b-a22b": {
+    "frozen_local_results": 900,
+    "remote_results": 900,
+    "remote_results_excluded_as_nonfrozen": 0,
+    "result_sha256_matches": 900,
+    "frozen_episodes_with_mirrored_step_io": 720,
+    "mirrored_prompt_files_for_frozen_episodes": 22082,
+    "mirrored_raw_files_for_frozen_episodes": 22076
+  }
+}

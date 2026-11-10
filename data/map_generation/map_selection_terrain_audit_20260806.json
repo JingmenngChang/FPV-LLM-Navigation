@@ -1,0 +1,120 @@
+{
+  "ok": true,
+  "checks": {
+    "selected_path_files_byte_identical": true,
+    "generated_10000_candidates": true,
+    "adjacency_tables_for_10000": true,
+    "final_map_count_60": true,
+    "final_configuration_count_180": true,
+    "all_final_maps_in_selected_1000": true,
+    "difficulty_60_map_set_matches": true,
+    "difficulty_values_match_sources": true,
+    "all_annotations_available": true,
+    "all_180_configurations_reachable": true,
+    "all_endpoints_have_graph_nodes": true,
+    "all_tile_instances_belong_to_formal_categories": true
+  },
+  "source_files": {
+    "selected_paths": "LlmFPV-main/LLM/map_setting/selected_paths.json",
+    "selected_paths_sha256": "9971be33dd3dc2b80759af8ab62bab54e7183f18d63f508054ce77d1d9f05860",
+    "adjacency_tables": "${MAP_GENERATION_ARCHIVE_ROOT}/LLM/adjacency_tables.json",
+    "annotations": "${MAP_GENERATION_ARCHIVE_ROOT}/organized_data/matched/annotations",
+    "generation_stats": "${MAP_GENERATION_ARCHIVE_ROOT}/LLM/generation_stats.json",
+    "selected_maps_1000": "${MAP_GENERATION_ARCHIVE_ROOT}/LLM/global_view/selected_maps_1000.json",
+    "difficulty_60": "${MAP_GENERATION_ARCHIVE_ROOT}/experiment_paths/60diff.csv",
+    "difficulty_all": "${MAP_GENERATION_ARCHIVE_ROOT}/feature_analysis/difficulty_per_image_final.csv",
+    "features_all": "${MAP_GENERATION_ARCHIVE_ROOT}/feature_analysis/Features_final.csv"
+  },
+  "counts": {
+    "candidate_maps_generated": 10000,
+    "final_maps": 60,
+    "final_configurations": 180,
+    "reachable_configurations": 180,
+    "maps_in_selected_1000": 60
+  },
+  "path_length_summary": {
+    "shortest_translational_steps": {
+      "min": 8,
+      "q1": 11.0,
+      "median": 12.0,
+      "q3": 14.0,
+      "max": 21
+    },
+    "shortest_graph_edges_sensitivity": {
+      "min": 8,
+      "q1": 11.0,
+      "median": 12.0,
+      "q3": 14.0,
+      "max": 21
+    },
+    "ordinary_minus_translational_frequency": {
+      "0": 180
+    }
+  },
+  "terrain_summary": {
+    "formal_categories": [
+      "flat/cube tiles",
+      "corner tiles",
+      "ramp tiles"
+    ],
+    "prototype_counts": {
+      "flat/cube": 6,
+      "corner": 15,
+      "ramp": 5
+    },
+    "global_tile_instance_counts": {
+      "corner": 259,
+      "flat/cube": 4085,
+      "ramp": 516
+    },
+    "all_maps_contain_all_three_categories": false,
+    "maps_with_all_three_categories": 58,
+    "maps_missing_one_or_more_categories": [
+      {
+        "map_id": 8611,
+        "categories_present": "flat/cube",
+        "missing": [
+          "corner",
+          "ramp"
+        ]
+      },
+      {
+        "map_id": 2816,
+        "categories_present": "corner;flat/cube",
+        "missing": [
+          "ramp"
+        ]
+      }
+    ],
+    "endpoint_category_counts": {
+      "flat/cube": 351,
+      "ramp": 9
+    },
+    "map_min_elevations": {
+      "1": 59,
+      "2": 1
+    },
+    "map_max_elevations": {
+      "6": 60
+    },
+    "map_elevation_spans": {
+      "5": 59,
+      "4": 1
+    },
+    "global_elevation_min": 1,
+    "global_elevation_max": 6
+  },
+  "difficulty_summary": {
+    "map_sets_match": true,
+    "values_match_all_three_sources": true,
+    "mismatches": [],
+    "D_i_min": 0.050632911392405,
+    "D_i_max": 0.90625
+  },
+  "interpretive_limits": [
+    "No recovered script documents the global screening that reduced 10,000 candidate maps to the selected 1,000 or final 60.",
+    "The available path-selection script applies only to an historical 20-map subset and cannot be generalized to all 60 maps.",
+    "'Distinct legal traversable paths' has no recovered operational definition; counting all walks is unbounded in cyclic graphs and counting simple paths or shortest paths would answer different questions.",
+    "The files establish reachability and shortest-path ranges for the 180 fixed configurations, not a documented exclusion of maps as too open, too simple or structurally degenerate."
+  ]
+}

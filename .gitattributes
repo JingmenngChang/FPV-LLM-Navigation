@@ -1,0 +1,8 @@
+data/map_generation/*.csv -diff -text
+data/map_generation/generation_stats.json -diff
+data/map_generation/selected_maps_1000.json -diff
+map_generation/pcgworker/c_acc.c -diff
+map_generation/pcgworker/connectivity_map.json -diff
+map_generation/pcgworker/mask.json -diff
+map_generation/pcgworker/wave.json -diff
+map_generation/** whitespace=-trailing-space,-space-before-tab,-blank-at-eof

@@ -1,0 +1,35 @@
+cff-version: 1.2.0
+message: "If you use this software or data, please cite the paper and the versioned release."
+title: "FPV-LLM-Navigation"
+type: software
+version: "1.0.0-data"
+date-released: 2026-11-10
+license: MIT
+repository-code: "https://github.com/JingmenngChang/FPV-LLM-Navigation"
+url: "https://github.com/JingmenngChang/FPV-LLM-Navigation/releases/tag/v1.0.0-data"
+authors:
+  - family-names: Chang
+    given-names: Jingmeng
+  - family-names: Xu
+    given-names: Shan
+  - family-names: Yin
+    given-names: Zi
+  - family-names: Xiao
+    given-names: Xizhi
+  - family-names: Liu
+    given-names: Jia
+preferred-citation:
+  type: article
+  title: "Humans and language models differ in prospective information sampling during navigation"
+  authors:
+    - family-names: Chang
+      given-names: Jingmeng
+    - family-names: Xu
+      given-names: Shan
+    - family-names: Yin
+      given-names: Zi
+    - family-names: Xiao
+      given-names: Xizhi
+    - family-names: Liu
+      given-names: Jia
+  year: 2026

@@ -1,0 +1,296 @@
+{
+  "release": "v1.0.0-data",
+  "repository": "https://github.com/JingmenngChang/FPV-LLM-Navigation",
+  "licenses": {
+    "code": "MIT",
+    "data_and_documentation": "CC BY 4.0"
+  },
+  "assets": {
+    "human-fpv-deidentified.jsonl.gz": {
+      "records": 8263,
+      "input_records": 8263,
+      "participants": 168,
+      "analysis_included_records": 8141,
+      "duplicate_participant_map_trial_keys": 0,
+      "participant_id_policy": "first-appearance stable IDs FPV-P0001...; no crosswalk retained"
+    },
+    "human-gv-deidentified.jsonl.gz": {
+      "records": 9581,
+      "input_records": 9581,
+      "participants": 138,
+      "analysis_included_records": 9581,
+      "duplicate_participant_map_trial_keys": 4,
+      "participant_id_policy": "first-appearance stable IDs GV-P0001...; no crosswalk retained"
+    },
+    "llm-primary-fpv.jsonl.gz": {
+      "records": 8100,
+      "models": {
+        "GPT-5": 3600,
+        "Gemini-2.5-Pro": 900,
+        "DeepSeek-V3.1-Thinking": 900,
+        "GLM-4.5": 900,
+        "Kimi-K2-Thinking": 900,
+        "Qwen3-235B-A22B": 900
+      },
+      "step_records_by_model": {
+        "GPT-5": 31382,
+        "Gemini-2.5-Pro": 19742,
+        "DeepSeek-V3.1-Thinking": 18376,
+        "GLM-4.5": 20139,
+        "Kimi-K2-Thinking": 19845,
+        "Qwen3-235B-A22B": 22082
+      },
+      "episodes_without_step_io_by_model": {
+        "GPT-5": 2159,
+        "DeepSeek-V3.1-Thinking": 180,
+        "GLM-4.5": 180,
+        "Kimi-K2-Thinking": 180,
+        "Qwen3-235B-A22B": 180
+      },
+      "missing_step_prompts": 10221,
+      "missing_raw_outputs": 10317,
+      "missing_step_prompts_by_model": {
+        "GPT-5": 10221,
+        "Gemini-2.5-Pro": 0,
+        "DeepSeek-V3.1-Thinking": 0,
+        "GLM-4.5": 0,
+        "Kimi-K2-Thinking": 0,
+        "Qwen3-235B-A22B": 0
+      },
+      "missing_raw_outputs_by_model": {
+        "GPT-5": 10228,
+        "Gemini-2.5-Pro": 5,
+        "DeepSeek-V3.1-Thinking": 1,
+        "GLM-4.5": 49,
+        "Kimi-K2-Thinking": 28,
+        "Qwen3-235B-A22B": 6
+      }
+    },
+    "llm-posthoc-fpv.jsonl.gz": {
+      "records": 1800,
+      "models": {
+        "GPT-5.6-Sol": 900,
+        "GPT-6-Astra": 900
+      },
+      "step_records_by_model": {
+        "GPT-5.6-Sol": 19883,
+        "GPT-6-Astra": 23593
+      },
+      "episodes_without_step_io_by_model": {},
+      "missing_step_prompts": 0,
+      "missing_raw_outputs": 5,
+      "missing_step_prompts_by_model": {
+        "GPT-5.6-Sol": 0,
+        "GPT-6-Astra": 0
+      },
+      "missing_raw_outputs_by_model": {
+        "GPT-5.6-Sol": 5,
+        "GPT-6-Astra": 0
+      }
+    },
+    "llm-trace-and-memory-ablation.jsonl.gz": {
+      "records": 720,
+      "experiments": {
+        "cognitive_map_prompt": 180,
+        "goal_trap_memory": 540
+      },
+      "conditions": {
+        "cognitive_map_prompt:none/cm_cot": 180,
+        "goal_trap_memory:none": 180,
+        "goal_trap_memory:goal_only": 180,
+        "goal_trap_memory:trap_only": 180
+      },
+      "missing_step_prompts": 0,
+      "missing_raw_outputs": 0
+    },
+    "llm-interventions.jsonl.gz": {
+      "records": 1400,
+      "models": {
+        "GPT-5": 560,
+        "Gemini-2.5-Pro": 840
+      },
+      "conditions": {
+        "GPT-5:higher_elevation": 140,
+        "GPT-5:higher_elevation_wider_exploration": 140,
+        "GPT-5:none": 140,
+        "GPT-5:wider_exploration": 140,
+        "Gemini-2.5-Pro:higher_elevation": 210,
+        "Gemini-2.5-Pro:higher_elevation_wider_exploration": 210,
+        "Gemini-2.5-Pro:none": 210,
+        "Gemini-2.5-Pro:wider_exploration": 210
+      },
+      "missing_step_prompts": 0,
+      "missing_raw_outputs": 8
+    },
+    "llm-global-view.jsonl.gz": {
+      "records": 1080,
+      "models": {
+        "GPT-5": 180,
+        "Gemini-2.5-Pro": 180,
+        "DeepSeek-V3.1-Thinking": 180,
+        "GLM-4.5": 180,
+        "Kimi-K2-Thinking": 180,
+        "Qwen3-235B-A22B": 180
+      },
+      "missing_prompts": 0,
+      "missing_raw_outputs": 127
+    },
+    "baseline-agent-outputs.tar.gz": {
+      "files": 4510
+    },
+    "analysis-and-figure-source.tar.gz": {
+      "files": 390
+    }
+  },
+  "privacy_audit": {
+    "human-fpv-deidentified.jsonl.gz": {
+      "forbidden_key_hits": 0,
+      "epoch_like_integer_hits": 0,
+      "original_participant_id_hits": 0,
+      "local_user_path_hits": 0,
+      "credential_pattern_hits": 0,
+      "absolute_time_string_hits": 0,
+      "email_address_hits": 0,
+      "transport_identifier_hits": 0
+    },
+    "human-gv-deidentified.jsonl.gz": {
+      "forbidden_key_hits": 0,
+      "epoch_like_integer_hits": 0,
+      "original_participant_id_hits": 0,
+      "local_user_path_hits": 0,
+      "credential_pattern_hits": 0,
+      "absolute_time_string_hits": 0,
+      "email_address_hits": 0,
+      "transport_identifier_hits": 0
+    },
+    "llm-primary-fpv.jsonl.gz": {
+      "forbidden_key_hits": 0,
+      "epoch_like_integer_hits": 0,
+      "original_participant_id_hits": 0,
+      "local_user_path_hits": 0,
+      "credential_pattern_hits": 0,
+      "absolute_time_string_hits": 0,
+      "email_address_hits": 0,
+      "transport_identifier_hits": 0
+    },
+    "llm-posthoc-fpv.jsonl.gz": {
+      "forbidden_key_hits": 0,
+      "epoch_like_integer_hits": 0,
+      "original_participant_id_hits": 0,
+      "local_user_path_hits": 0,
+      "credential_pattern_hits": 0,
+      "absolute_time_string_hits": 0,
+      "email_address_hits": 0,
+      "transport_identifier_hits": 0
+    },
+    "llm-trace-and-memory-ablation.jsonl.gz": {
+      "forbidden_key_hits": 0,
+      "epoch_like_integer_hits": 0,
+      "original_participant_id_hits": 0,
+      "local_user_path_hits": 0,
+      "credential_pattern_hits": 0,
+      "absolute_time_string_hits": 0,
+      "email_address_hits": 0,
+      "transport_identifier_hits": 0
+    },
+    "llm-interventions.jsonl.gz": {
+      "forbidden_key_hits": 0,
+      "epoch_like_integer_hits": 0,
+      "original_participant_id_hits": 0,
+      "local_user_path_hits": 0,
+      "credential_pattern_hits": 0,
+      "absolute_time_string_hits": 0,
+      "email_address_hits": 0,
+      "transport_identifier_hits": 0
+    },
+    "llm-global-view.jsonl.gz": {
+      "forbidden_key_hits": 0,
+      "epoch_like_integer_hits": 0,
+      "original_participant_id_hits": 0,
+      "local_user_path_hits": 0,
+      "credential_pattern_hits": 0,
+      "absolute_time_string_hits": 0,
+      "email_address_hits": 0,
+      "transport_identifier_hits": 0
+    },
+    "baseline-agent-outputs.tar.gz": {
+      "regular_members_scanned": 4510,
+      "text_members_scanned": 4150,
+      "unsafe_member_path_hits": 0,
+      "local_or_remote_machine_path_hits": 0,
+      "credential_pattern_hits": 0,
+      "original_participant_id_hits": 0,
+      "absolute_time_string_hits": 0,
+      "email_address_hits": 0,
+      "transport_identifier_hits": 0
+    },
+    "analysis-and-figure-source.tar.gz": {
+      "regular_members_scanned": 390,
+      "text_members_scanned": 309,
+      "unsafe_member_path_hits": 0,
+      "local_or_remote_machine_path_hits": 0,
+      "credential_pattern_hits": 0,
+      "original_participant_id_hits": 0,
+      "absolute_time_string_hits": 0,
+      "email_address_hits": 0,
+      "transport_identifier_hits": 0
+    }
+  },
+  "files": [
+    {
+      "name": "LICENSE-DATA",
+      "bytes": 1131,
+      "sha256": "840720730f3d071a6da834470cc9fc854ea2f3f47ec6ac8e72037c6cb89fa4d5"
+    },
+    {
+      "name": "README-RELEASE.md",
+      "bytes": 717,
+      "sha256": "c883ec9515312ea17b3704d5cbb75c38db1a0b554c5b3eec137c8c444192ba5e"
+    },
+    {
+      "name": "analysis-and-figure-source.tar.gz",
+      "bytes": 19729810,
+      "sha256": "fb972007a409134e1dd5ab2af6a5f0efeee9f95f3f95d975ca6d7c8798193acb"
+    },
+    {
+      "name": "baseline-agent-outputs.tar.gz",
+      "bytes": 9217355,
+      "sha256": "ce6afbd0bef22aea2b0a6c2c271a8888a8f8948de57bcc3b64be02cf4da35a77"
+    },
+    {
+      "name": "human-fpv-deidentified.jsonl.gz",
+      "bytes": 270756639,
+      "sha256": "37022ac9897bdb6bc9e731c766394fd23f2b0261cbc196923d4c0a7661c5ce08"
+    },
+    {
+      "name": "human-gv-deidentified.jsonl.gz",
+      "bytes": 65178396,
+      "sha256": "f06d13c0584ca23a2c2b962cfa99c7fb18f1adc13c7114eec88df6fd1c4d3a83"
+    },
+    {
+      "name": "llm-global-view.jsonl.gz",
+      "bytes": 2874959,
+      "sha256": "16c94550ddffebad941483da78b6e3134632695165ca616e432b98458f72816d"
+    },
+    {
+      "name": "llm-interventions.jsonl.gz",
+      "bytes": 16848799,
+      "sha256": "77499f267ca32bb4b146577a405af61640fd42ee2300dafac6c5f6947638ea3b"
+    },
+    {
+      "name": "llm-posthoc-fpv.jsonl.gz",
+      "bytes": 20221389,
+      "sha256": "d6b0f2b174cf5095acb8167c0d5bcb445cebf6c6a9120320a9c37c2bfa129f1b"
+    },
+    {
+      "name": "llm-primary-fpv.jsonl.gz",
+      "bytes": 72813373,
+      "sha256": "f6afd5190f13f099d505c8080f411323598eb69a3386087d4c8c409e1e1e94bf"
+    },
+    {
+      "name": "llm-trace-and-memory-ablation.jsonl.gz",
+      "bytes": 19859411,
+      "sha256": "2458a2f8b8af3d4de1c8dc296ba9c48da69139069fe7149e57ef7f3e69ace501"
+    }
+  ]
+}

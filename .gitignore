@@ -9,3 +9,6 @@ outputs/
 **/api_response.json
 **/api_response.txt
 **/api_request.json
+release_assets/
+*.jsonl.gz
+*.tar.gz

@@ -1,0 +1,25 @@
+Creative Commons Attribution 4.0 International
+
+The data, prompts, figures, and documentation in this repository and in the
+associated `v1.0.0-data` Release are licensed under the Creative Commons
+Attribution 4.0 International License (CC BY 4.0).
+
+You are free to share and adapt these materials for any purpose, including
+commercial use, provided that you give appropriate credit, provide a link to
+the license, and indicate whether changes were made. You may not apply legal
+terms or technological measures that legally restrict others from doing
+anything the license permits.
+
+Full license text and terms:
+https://creativecommons.org/licenses/by/4.0/legalcode
+
+Preferred attribution:
+
+Jingmeng Chang, Shan Xu, Zi Yin, Xizhi Xiao, and Jia Liu. "Humans and language
+models differ in prospective information sampling during navigation."
+FPV-LLM-Navigation, release v1.0.0-data.
+https://github.com/JingmenngChang/FPV-LLM-Navigation
+
+This notice does not replace third-party license notices retained with bundled
+source components. Source code covered by the repository MIT license remains
+under MIT unless a file states otherwise.
